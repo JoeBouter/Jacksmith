@@ -3,105 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jacksmith</title>
+  <title>Play Jacksmith</title>
   <style>
     body {
       margin: 0;
-      background: #1a1a1a;
-      color: #f0f0f0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-    }
-    header {
-      padding: 25px 10px;
-      font-size: 2.2em;
-      font-weight: bold;
-      color: #ffcc33;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+      background: #222;
+      color: #fff;
+      text-align: center;
+      font-family: Arial, sans-serif;
     }
     .game-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: #000;
-      border-radius: 10px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.9);
-      padding: 10px;
-    }
-    ruffle-player {
+      margin: 20px auto;
       width: 800px;
-      height: 600px;
-      max-width: 95vw;
-      max-height: 75vh;
-      border: 2px solid #333;
-      border-radius: 8px;
-      background: #000;
+      max-width: 95%;
     }
-    .controls {
-      margin-top: 15px;
+    #game {
+      width: 100%;
+      height: 600px;
+      background: #000;
     }
     button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      font-size: 1em;
-      background: #ffcc33;
-      color: #111;
-      font-weight: bold;
+      margin-top: 10px;
+      padding: 8px 14px;
+      font-size: 16px;
       cursor: pointer;
-      transition: transform 0.15s ease, background 0.2s ease;
+      border: none;
+      border-radius: 5px;
+      background: #4caf50;
+      color: white;
     }
     button:hover {
-      background: #e6b800;
-      transform: scale(1.05);
+      background: #45a049;
     }
-    footer {
-      margin-top: auto;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #aaa;
+    img.cover {
+      margin-top: 20px;
+      width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
     }
   </style>
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 </head>
 <body>
-  <header>⚒️ Jacksmith ⚒️</header>
-  
+  <h1>Jacksmith</h1>
   <div class="game-container">
-    <!-- Empty Ruffle player, we attach SWF with JS -->
-    <ruffle-player id="player"></ruffle-player>
-    <div class="controls">
-      <button onclick="goFullscreen()">Fullscreen</button>
+    <div id="game">
+      <embed id="ruffle-player" src="jacksmith.swf" width="100%" height="100%">
     </div>
+    <button onclick="goFullscreen()">Fullscreen</button>
+    <img src="jacksmith_300x300.jpg" alt="Jacksmith cover" class="cover">
   </div>
 
-  <footer>
-    Running with Ruffle — bringing Flash back to life!
-  </footer>
-
   <script>
-    // Load Ruffle instance
-    window.RufflePlayer = window.RufflePlayer || {};
-    window.addEventListener("load", () => {
-      const ruffle = window.RufflePlayer.newest();
-      const player = ruffle.createPlayer();
-      const container = document.getElementById("player");
-      container.appendChild(player);
-      player.load("jacksmith.swf"); // tell it to load your SWF file
-    });
-
     function goFullscreen() {
-      const player = document.querySelector("ruffle-player");
-      if (player.requestFullscreen) {
-        player.requestFullscreen();
-      } else if (player.webkitRequestFullscreen) {
-        player.webkitRequestFullscreen();
-      } else if (player.msRequestFullscreen) {
-        player.msRequestFullscreen();
+      let elem = document.getElementById("game");
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { // Safari
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { // IE11
+        elem.msRequestFullscreen();
       }
     }
   </script>
