@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play Jacksmith</title>
+  <style>
+    body {
+      margin: 0;
+      background: #222;
+      color: #fff;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    .game-container {
+      margin: 20px auto;
+      width: 800px;
+      max-width: 95%;
+    }
+    #game {
+      width: 100%;
+      height: 600px;
+      background: #000;
+    }
+    img.cover {
+      margin-top: 20px;
+      width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+  </style>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+</head>
+<body>
+  <h1>Jacksmith</h1>
+  <div class="game-container">
+    <div id="game">
+      <embed src="jacksmith.swf" width="100%" height="100%">
+    </div>
+    <img src="jacksmith_300x300.jpg" alt="Jacksmith cover" class="cover">
+  </div>
+</body>
+</html>
