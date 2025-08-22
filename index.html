@@ -72,24 +72,35 @@
   <header>⚒️ Jacksmith ⚒️</header>
   
   <div class="game-container">
-    <ruffle-player id="player" src="jacksmith.swf"></ruffle-player>
+    <!-- Empty Ruffle player, we attach SWF with JS -->
+    <ruffle-player id="player"></ruffle-player>
     <div class="controls">
       <button onclick="goFullscreen()">Fullscreen</button>
     </div>
   </div>
 
   <footer>
-    joebouter.github.io/Jacksmith
+    Running with Ruffle — bringing Flash back to life!
   </footer>
 
   <script>
+    // Load Ruffle instance
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.addEventListener("load", () => {
+      const ruffle = window.RufflePlayer.newest();
+      const player = ruffle.createPlayer();
+      const container = document.getElementById("player");
+      container.appendChild(player);
+      player.load("jacksmith.swf"); // tell it to load your SWF file
+    });
+
     function goFullscreen() {
-      const player = document.getElementById("player");
+      const player = document.querySelector("ruffle-player");
       if (player.requestFullscreen) {
         player.requestFullscreen();
-      } else if (player.webkitRequestFullscreen) { // Safari
+      } else if (player.webkitRequestFullscreen) {
         player.webkitRequestFullscreen();
-      } else if (player.msRequestFullscreen) { // IE/Edge
+      } else if (player.msRequestFullscreen) {
         player.msRequestFullscreen();
       }
     }
